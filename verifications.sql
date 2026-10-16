@@ -15,3 +15,13 @@ SELECT
         OVER (PARTITION BY lc.id_commande) AS total
 FROM ligne_commande lc
 JOIN plats p ON lc.id_plat = p.id_plat;
+
+-- verification etape 4
+
+SELECT
+    co.id_commande,
+    co.daty,
+    COALESCE(cl.nom, 'client de passage') AS nom_client
+FROM commandes co
+LEFT JOIN clients cl
+    ON co.id_client = cl.id_client;
