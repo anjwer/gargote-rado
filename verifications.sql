@@ -25,3 +25,13 @@ SELECT
 FROM commandes co
 LEFT JOIN clients cl
     ON co.id_client = cl.id_client;
+
+-- verification etape 5
+
+select c.id_serveur, 
+        count(distinct c.id_commande) as nbcommandes ,
+        COALESCE(SUM(lc.quantite * p.prix_unitaire), 0) AS ca 
+from commandes c
+left join ligne_commande lc on lc.id_commande = c.id_commande
+left join plats p on p.id_plat = lc.id_plat 
+group by c.id_serveur;
